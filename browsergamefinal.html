@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Star Clicker</title>
+
+    <style>
+        #stars {
+            display: grid;
+            grid-template-columns: repeat(6, 40px);
+            gap: 8px;
+            justify-content: center;
+        }
+
+        
+        .star {
+            font-size: 25px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Star Clicker</h2>
+
+<p id="message">Click the stars before the timer runs out!</p>
+<p id="timer">Time: 7</p>
+
+<button id="start">Start</button>
+
+<div id="stars">
+    <button class="star">⭐</button><button class="star">⭐</button><button class="star">⭐</button><button class="star">⭐</button><button class="star">⭐</button><button class="star">⭐</button>
+    <button class="star">⭐</button><button class="star">⭐</button><button class="star">⭐</button><button class="star">⭐</button><button class="star">⭐</button><button class="star">⭐</button>
+    <button class="star">⭐</button><button class="star">⭐</button><button class="star">⭐</button><button class="star">⭐</button><button class="star">⭐</button><button class="star">⭐</button>
+</div>
+
+<script>
+    let time = 7;
+    let countdown;
+    let stars = document.querySelectorAll(".star");
+    let clicked = 0;
+
+    document.getElementById("start").addEventListener("click", function() {
+        clearInterval(countdown);
+        time = 7;
+        clicked = 0;
+
+        stars.forEach(function(star) {
+            star.innerText = "⭐";
+            star.disabled = false;
+        });
+
+        document.getElementById("message").innerText = "Click all the stars!";
+        document.getElementById("timer").innerText = "Time: " + time;
+
+        countdown = setInterval(function() {
+            time--;
+            document.getElementById("timer").innerText = "Time: " + time;
+
+            if (time === 0) {
+                clearInterval(countdown);
+                document.getElementById("message").innerText = "You lose!";
+            }
+        }, 1000);
+    });
+
+    stars.forEach(function(star) {
+        star.addEventListener("click", function() {
+            if (time > 0 && star.innerText === "⭐") {
+                star.innerText = "🌟";
+                clicked++;
+
+                console.log("Star clicked!");
+
+                if (clicked === 18) {
+                    clearInterval(countdown);
+                    document.getElementById("message").innerText = "You win!";
+                }
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
