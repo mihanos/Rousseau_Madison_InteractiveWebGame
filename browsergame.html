@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Click The Dots!</title>
+
+    <style>
+        #game {
+            display: grid;
+            grid-template-columns: repeat(5, 40px);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        #start {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        .dot {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: red;
+            border: none;
+            margin: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .clicked {
+            background: green;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Click The Dots!</h1>
+
+    <p>Click the dots before the timer runs out!</p>
+
+    <button id="start">Start Game</button>
+
+    <div id="game"></div>
+
+    <script>
+        let game = document.getElementById("game");
+
+        for (let i = 0; i < 20; i++) {
+            let dot = document.createElement("button");
+
+            dot.className = "dot";
+
+            dot.onclick = function() {
+                dot.className = "clicked dot";
+            };
+
+            game.appendChild(dot);
+        }
+    </script>
+</body>
+</html>
